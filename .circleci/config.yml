@@ -36,5 +36,4 @@ jobs:
       - run: yarn start
         
       # run tests!
-      - run: 'cd ./frameworks/cypress && yarn install'
-      - run: yarn test:headless
+      - run: 'yarn start & cd ./frameworks/cypress & yarn install & yarn test:headless'
