@@ -32,8 +32,6 @@ jobs:
           paths:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
-      
-      - run: yarn start
         
       # run tests!
       - run: 'yarn start & cd ./frameworks/cypress & yarn install & yarn test:headless'
