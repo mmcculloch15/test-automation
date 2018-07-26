@@ -37,3 +37,7 @@ jobs:
         
       # run tests!
       - run: 'yarn dev & yarn test'
+      - store_artifacts:
+          path: cypress/videos
+      - store_artifacts:
+          path: cypress/screenshots
