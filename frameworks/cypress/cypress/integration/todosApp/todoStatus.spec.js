@@ -10,9 +10,10 @@ describe('Marking todos complete', () => {
 
   it('Complete a newly added todo item', () => {
     cy.get(newTodo).type(`${todoText}{enter}`) //{enter} simulates an enter key press in Cypress
+    cy.contains(todoText) //let's ensure that this element has been found before continuing to the next step
     cy
       .get('[qa-id=todo-item]')
-      .last()
+      .last() //Ensure that the newly added todo item is placed at the bottom of the list
       .should('have.text', todoText)
       .find('[qa-id=check-todo]') //find the checkbox associated with our newly added todo item
       .click()
