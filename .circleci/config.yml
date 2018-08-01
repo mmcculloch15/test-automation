@@ -33,6 +33,10 @@ jobs:
           paths:
             - node_modules
             - frameworks/cypress/node_modules
+            - ~/.npm
+            - ~/.cache
+            - ~/frameworks/cypress/.npm
+            - ~/frameworks/cypress/.cache
           key: v1-dependencies-{{ checksum "package.json" }}
         
       # run tests!
