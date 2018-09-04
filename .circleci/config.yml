@@ -29,6 +29,8 @@ jobs:
           name: Install cypress
           command: yarn install:cypress
 
+      - run: cy:verify
+
       - save_cache:
           paths:
             - ~/.npm

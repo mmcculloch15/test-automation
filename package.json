@@ -9,7 +9,7 @@
     "serve": "node .",
     "dev": "concurrently \"npm run watch\" \"npm run serve\"",
     "start-server": "yarn build && yarn serve",
-    "install:cypress": "cd ./frameworks/cypress && yarn install",
+    "install:cypress": "cd ./frameworks/cypress && yarn install && yarn cy:verify",
     "test": "cd ./frameworks/cypress && yarn test:headless",
     "ci": "start-server-and-test start-server http://localhost:3030 test"
   },
