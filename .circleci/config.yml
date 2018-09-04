@@ -49,7 +49,7 @@ jobs:
     steps:
       - attach_workspace:
           at: ~/
-      - run: yarn ci
+      - run: yarn start-and-test
       - store_artifacts:
           path: frameworks/cypress/cypress/videos
       - store_artifacts:
