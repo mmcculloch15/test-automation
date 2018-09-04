@@ -37,9 +37,6 @@ jobs:
             - ~/frameworks/cypress/.cache
           key: cache-test-{{ checksum "package.json" }}
 
-      # run tests!
-      - run: 'yarn dev'
-
       - persist_to_workspace:
           root: ~/
           paths:
@@ -52,7 +49,7 @@ jobs:
     steps:
       - attach_workspace:
           at: ~/
-      - run: yarn test
+      - run: yarn ci
       - store_artifacts:
           path: frameworks/cypress/cypress/videos
       - store_artifacts:
