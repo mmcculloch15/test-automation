@@ -1,7 +1,7 @@
 {
   "name": "todos-app",
   "version": "1.0.0",
-  "description": "",
+  "description": "Sample Todos application to be used to explain test automation frameworks",
   "main": "server.js",
   "scripts": {
     "build": "webpack",
