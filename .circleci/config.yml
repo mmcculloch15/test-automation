@@ -40,11 +40,11 @@ jobs:
       # run tests!
       - run: 'yarn dev'
 
-      - ? persist_to_workspace
-        root: ~/
-        paths:
-          - repo
-          - .cache/Cypress
+      - persist_to_workspace:
+          root: ~/
+          paths:
+            - repo
+            - .cache/Cypress
 
   test:
     <<: *defaults
