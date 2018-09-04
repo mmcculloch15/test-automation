@@ -2,43 +2,41 @@ describe('"Todos Left" counter', () => {
   it('Should display singular form of todo if 1 todo is active', () => {
     cy.server()
 
-    //We can mock our API to return 1 item when called by passing a response variable with cy.route()
+    //We can mock our API to return 1 active todo item when called by passing a response variable with cy.route()
     cy.route('GET', 'api/todos', [
       {
         id: 1,
         name: 'Refinement',
-        isComplete: true,
+        isComplete: true
       },
       {
         id: 2,
         name: 'Planning',
-        isComplete: false,
-      },
+        isComplete: false
+      }
     ])
     cy.visit('/')
     cy.get('.todo-count').should('have.text', '1 todo left')
   })
 
-  it('Should display plural form of todo if 2 todos are active', () => {
+  it('Should display plural format of todo if 2 todos are active', () => {
     cy.server()
-
-    //We can mock our API to return 1 item when called by passing a response variable with cy.route()
     cy.route('GET', 'api/todos', [
       {
         id: 1,
         name: 'Refinement',
-        isComplete: true,
+        isComplete: true
       },
       {
         id: 2,
         name: 'Planning',
-        isComplete: false,
+        isComplete: false
       },
       {
         id: 3,
         name: 'Demo',
-        isComplete: false,
-      },
+        isComplete: false
+      }
     ])
     cy.visit('/')
     cy.get('.todo-count').should('have.text', '2 todos left')
