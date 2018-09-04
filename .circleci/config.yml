@@ -26,10 +26,8 @@ jobs:
           command: yarn install
 
       - run:
-          name: Install cypress
+          name: Install and verify cypress
           command: yarn install:cypress
-
-      - run: cy:verify
 
       - save_cache:
           paths:
