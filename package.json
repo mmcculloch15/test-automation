@@ -8,10 +8,10 @@
     "watch": "webpack --watch",
     "serve": "node .",
     "dev": "concurrently \"npm run watch\" \"npm run serve\"",
-    "start-server": "yarn build && yarn serve",
+    "start": "yarn build && yarn serve",
     "install:cypress": "cd ./frameworks/cypress && yarn install && yarn cy:verify",
     "test": "cd ./frameworks/cypress && yarn test:headless",
-    "ci": "start-server-and-test start-server http://localhost:3030 test"
+    "start-and-test": "start-server-and-test start http://localhost:3030 test"
   },
   "keywords": [],
   "author": "",
