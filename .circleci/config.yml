@@ -9,6 +9,5 @@ workflows:
           start: npm run start
           spec: cypress/integration/todosApp/*
           record: true
-          parallel: true
-          parallelism: 2
+
       
