@@ -9,11 +9,9 @@
     "serve": "node .",
     "dev": "concurrently \"npm run watch\" \"npm run serve\"",
     "start": "yarn build && yarn serve",
-    "install:cypress": "yarn install && yarn cy:verify",
     "test:cy": "./node_modules/.bin/cypress open",
-    "test:cy:headless": "./node_modules/.bin/cypress run --spec 'cypress/integration/todosApp/*' --record --key e16ffb96-272f-4932-b1dc-a72f00499304 --parallel",
-    "cy:verify": "./node_modules/.bin/cypress verify",
-    "start-and-test": "start-server-and-test start http://localhost:3030 test:cy:headless"
+    "test:cy:headless": "./node_modules/.bin/cypress run --spec 'cypress/integration/todosApp/*' ",
+    "cy:verify": "./node_modules/.bin/cypress verify"
   },
   "keywords": [],
   "author": "",
