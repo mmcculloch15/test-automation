@@ -1,4 +1,8 @@
 {
-  "baseUrl": "http://localhost:3030",
-  "projectId": "3hp4n2"
+	"baseUrl": "http://localhost:3030",
+	"projectId": "3hp4n2",
+	"reporter": "junit",
+	"reporterOptions": {
+		"mochaFile": "results/test-results-[hash].xml"
+	}
 }

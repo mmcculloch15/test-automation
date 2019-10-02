@@ -21,7 +21,7 @@ exports.config = {
 	// NPM script (see https://docs.npmjs.com/cli/run-script) then the current working
 	// directory is where your package.json resides, so `wdio` will be called from there.
 	//
-	specs: ['./webdriverio/tests/*.test.js'],
+	specs: ['./webdriverio/tests/*.spec.js'],
 	// Patterns to exclude.
 	exclude: [
 		// 'path/to/excluded/files'
@@ -135,7 +135,15 @@ exports.config = {
 	// Test reporter for stdout.
 	// The only one supported by default is 'dot'
 	// see also: https://webdriver.io/docs/dot-reporter.html
-	reporters: ['spec'],
+	reporters: [
+		'spec',
+		[
+			'junit',
+			{
+				outputDir: './',
+			},
+		],
+	],
 
 	//
 	// Options to be passed to Mocha.
