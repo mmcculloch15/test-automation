@@ -82,6 +82,16 @@ jobs:
                   name: Run wdio tests
                   command: npm run test:wdio
                   working_directory: ''
+      Combine test results:
+        steps: 
+            - attach_workspace:
+                  at: ~/
+            - run: 
+                  name: Merge reports
+                  command: npm run merge-reports
+                  working_directory: ''
+            - store_test_results: 
+                  path: ./merged-results.xml
 workflows:
     build:
         jobs:
@@ -92,4 +102,8 @@ workflows:
             - WebdriverIO tests:
                   requires:
                       - cypress/install
+            - Combine test results:
+                  requires:
+                        - Cypress tests
+                        - WebdriverIO tests               
     version: 2
