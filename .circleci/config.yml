@@ -103,6 +103,8 @@ jobs:
           working_directory: ''
       - store_test_results:
           path: ./results
+      - store_artifacts:
+          path: ./results
 workflows:
   build:
     jobs:
