@@ -4,7 +4,11 @@ orbs:
 workflows:
     build:
         jobs:
+            - cypress/install
             - cypress/run:
+                  name: 'Cypress tests'
+                  requires:
+                      - cypress/install
                   store_artifacts: true
                   start: npm run start
                   spec: cypress/integration/todosApp/*
