@@ -13,7 +13,7 @@
 		"test:cy": "./node_modules/.bin/cypress open",
 		"test:cy:headless": "./node_modules/.bin/cypress run --spec 'cypress/integration/todosApp/*' ",
 		"cy:verify": "./node_modules/.bin/cypress verify",
-		"merge-reports": "./node_modules/.bin/junit-merge --dir ./results --out ./merged-results.xml"
+		"merge-reports": "./node_modules/.bin/junit-merge --dir ./results --out ./results/merged-results.xml"
 	},
 	"keywords": [],
 	"author": "",

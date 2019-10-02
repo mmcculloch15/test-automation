@@ -102,7 +102,7 @@ jobs:
           command: npm run merge-reports
           working_directory: ''
       - store_test_results:
-          path: ./merged-results.xml
+          path: ./results
 workflows:
   build:
     jobs:
