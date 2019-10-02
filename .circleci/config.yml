@@ -65,6 +65,12 @@ jobs:
           path: cypress/screenshots
       - store_artifacts:
           path: results
+      - persist_to_workspace:
+          root: ~/
+          paths:
+            - project/results
+            - results
+
   WebdriverIO tests:
     docker:
       - image: circleci/node:10
