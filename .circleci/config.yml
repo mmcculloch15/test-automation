@@ -1,13 +1,11 @@
 version: 2.1
 orbs:
-  cypress: cypress-io/cypress@1.8
+    cypress: cypress-io/cypress@1.8
 workflows:
-  build:
-    jobs:
-      - cypress/run:
-          store_artifacts: true
-          start: npm run start
-          spec: cypress/integration/todosApp/*
-          record: true
-
-      
+    build:
+        jobs:
+            - cypress/run:
+                  store_artifacts: true
+                  start: npm run start
+                  spec: cypress/integration/todosApp/*
+                  record: true
