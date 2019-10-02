@@ -1,24 +1,40 @@
-import { todosPage } from './todos.page'
+import { todosPage as TodosPage } from './todos.page'
 import * as todos from '../../cypress/fixtures/activeTodos.json'
+const assert = require('assert')
 
-describe('Todos tests', () => {
+describe('Smoke tests', () => {
+	beforeEach(() => {
+		browser.url('/')
 
-  beforeEach(() => {
-    browser.execute((todos) => {
-      fetch('/api/todos/bulkload', {
-        method: 'POST',
-        body: { todos: todos },
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      })
-    }, todos)
-  })
+		const body = { todos: todos.default }
+		browser.execute(body => {
+			fetch('/api/todos/bulkload', {
+				method: 'POST',
+				body: JSON.stringify(body),
+				headers: {
+					'Content-Type': 'application/json',
+				},
+			})
+		}, body)
 
-  it('display an input box', () => {
-    browser.url('/')
-    console.log(todosPage.newTodoInput)
-    todosPage.newTodoInput.waitForDisplayed()
-    todosPage.addNewTodo('Something')
-  })
+		browser.refresh()
+		browser.waitUntil(
+			() => TodosPage.todoItems.length === body.todos.length,
+			10000,
+			'FAIL: Todo data was not loaded successfully'
+		)
+	})
+
+	it('should be able to add a new todo', () => {
+		TodosPage.newTodoInput.waitForDisplayed()
+		let initialTodosCount = TodosPage.todoItems.length
+		TodosPage.addNewTodo('Something else')
+		browser.waitUntil(
+			() => {
+				return TodosPage.todoItems.length > initialTodosCount
+			},
+			10000,
+			'FAIL: The todo was not added'
+		)
+	})
 })
