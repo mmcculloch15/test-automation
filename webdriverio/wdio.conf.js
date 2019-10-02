@@ -140,7 +140,7 @@ exports.config = {
 		[
 			'junit',
 			{
-				outputDir: './',
+				outputDir: './results',
 			},
 		],
 	],
