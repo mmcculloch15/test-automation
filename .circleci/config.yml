@@ -1,17 +1,92 @@
-version: 2.1
-orbs:
-    cypress: cypress-io/cypress@1.8
+version: 2
+jobs:
+  cypress/install:
+    docker:
+    - image: cypress/base:10
+    steps:
+    - checkout
+    - restore_cache:
+        keys:
+        - cache-{{ arch }}-{{ .Branch }}-{{ checksum "package.json" }}
+    - run:
+        name: Check if package-lock.json exists
+        command: |
+          if [ ! -e ./package-lock.json ]; then
+            echo "The Cypress orb uses 'npm ci' to install 'node_modules', which requires a 'package-lock.json'."
+            echo "A 'package-lock.json' file was not found. Please run 'npm install' in your project,"
+            echo "and commit 'package-lock.json' to your repo."
+            exit 1
+          fi
+        working_directory: ''
+    - run:
+        name: Npm CI
+        command: npm ci
+        working_directory: ''
+    - run:
+        command: npx cypress verify
+        working_directory: ''
+    - save_cache:
+        key: cache-{{ arch }}-{{ .Branch }}-{{ checksum "package.json" }}
+        paths:
+        - ~/.npm
+        - ~/.cache
+    - persist_to_workspace:
+        root: ~/
+        paths:
+        - project
+        - .cache/Cypress
+  Cypress tests:
+    docker:
+    - image: cypress/base:10
+    parallelism: 2
+    steps:
+    - run:
+        command: echo "Assuming dependencies were installed using cypress/install
+          job"
+    - attach_workspace:
+        at: ~/
+    - run:
+        name: Start
+        command: npm run start
+        background: true
+        working_directory: ''
+    - run:
+        name: Run Cypress tests
+        command: |
+          npx cypress run \
+             --spec 'cypress/integration/todosApp/*'  \
+             \
+             --record \
+               \
+               --parallel  \
+        working_directory: ''
+    - store_artifacts:
+        path: cypress/videos
+    - store_artifacts:
+        path: cypress/screenshots
+  WebdriverIO tests:
+    docker: 
+      - image: circleci/node:10
+    steps:
+      - attach_workspace: 
+        at: ~/
+      - run: 
+          name: Start
+          command: npm run start
+          background: true
+          working_directory: ''
+      -run: 
+          name: Run wdio tests
+          command: npm run test:wdio
+          working_directory: ''
 workflows:
-    build:
-        jobs:
-            - cypress/install
-            - cypress/run:
-                  name: 'Cypress tests'
-                  requires:
-                      - cypress/install
-                  store_artifacts: true
-                  start: npm run start
-                  spec: cypress/integration/todosApp/*
-                  record: true
-                  parallel: true
-                  parallelism: 2
+  build:
+    jobs:
+    - cypress/install
+    - Cypress tests:
+        requires:
+        - cypress/install
+    - WebdriverIO tests:
+        requires:
+        - cypress/install
+  version: 2
