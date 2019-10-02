@@ -86,6 +86,11 @@ jobs:
           name: Run wdio tests
           command: npm run test:wdio
           working_directory: ''
+      - persist_to_workspace:
+          root: ~/
+          paths:
+            - project/results
+            - results
   Combine test results:
     docker:
       - image: circleci/node:10
