@@ -138,7 +138,7 @@ exports.config = {
 	reporters: [
 		'spec',
 		[
-			'junit',
+			'mochawesome',
 			{
 				outputDir: './results',
 			},
@@ -270,8 +270,16 @@ exports.config = {
 	 * @param {Array.<Object>} capabilities list of capabilities details
 	 * @param {<Object>} results object containing test results
 	 */
-	// onComplete: function(exitCode, config, capabilities, results) {
-	// },
+	onComplete: function(exitCode, config, capabilities, results) {
+		const mergeResults = require('wdio-mochawesome-reporter/mergeResults')
+		const fs = require('fs')
+		//mergeResults doesn't give you the option to change the name of the merged file
+		//and mochawesome-merge requires a mochawesome_* naming convention
+		mergeResults('./results', 'wdio-*')
+		fs.rename('./results/wdio-ma-merged.json', './results/mochawesome_wdio.json', err => {
+			if (err) throw err
+		})
+	},
 	/**
 	 * Gets executed when a refresh happens.
 	 * @param {String} oldSessionId session ID of the old session

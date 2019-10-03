@@ -97,14 +97,19 @@ jobs:
     steps:
       - attach_workspace:
           at: ~/
-      - run:
-          name: Merge reports
-          command: npm run merge-reports
-          working_directory: ''
       - store_test_results:
           path: ./results
+      - run:
+          name: Merge Report
+          command: npm run merge-reports
+          working_directory: ''
+      - run:
+          name: Generate Report
+          command: npm run generate-report
+          working_directory: ''
       - store_artifacts:
-          path: ./results
+          path: ./mochawesome-report
+
 workflows:
   build:
     jobs:

@@ -1,8 +1,12 @@
 {
 	"baseUrl": "http://localhost:3030",
 	"projectId": "3hp4n2",
-	"reporter": "junit",
+	"reporter": "mochawesome",
 	"reporterOptions": {
-		"mochaFile": "results/test-results-[hash].xml"
+		"reportDir": "./results",
+		"quiet": true,
+		"overwrite": false,
+		"html": false,
+		"json": true
 	}
 }
