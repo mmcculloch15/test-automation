@@ -1,6 +1,6 @@
 version: 2
 jobs:
-  cypress/install:
+  Install dependencies:
     docker:
       - image: cypress/base:10
     steps:
@@ -113,13 +113,13 @@ jobs:
 workflows:
   build:
     jobs:
-      - cypress/install
+      - Install dependencies
       - Cypress tests:
           requires:
-            - cypress/install
+            - Install dependencies
       - WebdriverIO tests:
           requires:
-            - cypress/install
+            - Install dependencies
       - Combine test results:
           requires:
             - Cypress tests
